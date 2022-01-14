@@ -6,25 +6,27 @@ namespace App15
     {
         static void Main(string[] args)
         {
-            int [] array = {5, 3, 6, 2, 4, 1};
-            
-            for (int i = 0; i <= array.Length; i++)
+            int[] array = { 5, 3, 6, 2, 4, 1 };
+            int min;
+            min = array[0];
+            int temp;
+            for (int i = 0; i < array.Length -1 ; i++)
             {
-                int min = i;
-                for (var j = i+1; j <= array.Length; j++)
-                    if (array[j] < array[min])
-                    var min = j;
-            
-                if ( min != i)
+                for (int j = i+1; j < array.Length; j++)
                 {
-                    var sort = array[j];
-                    array[j] = array[min];
-                    array[min] = sort;
+                    if (array[i] < min) min = array[i];
                 }
-             /*return Console.WriteLine(array);   */                   
-                
+                temp = array[min];
+                array[min] = array[i];
+                array[i] = temp;
             }
-            
+            for (int i = 0; i<array.Length; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
+
+
         }
+
     }
 }
