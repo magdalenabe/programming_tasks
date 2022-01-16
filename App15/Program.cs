@@ -6,26 +6,33 @@ namespace App15
     {
         static void Main(string[] args)
         {
-            int[] array = { 5, 3, 6, 2, 4, 1 };
-            int min;
-            min = array[0];
-            int temp;
-            for (int i = 0; i < array.Length -1 ; i++)
+            int[] array = { 5, 3, 1, 2, 4, 1 };
+            //Selection sort
+            for (int i = 0; i < array.Length - 1 ; i++)
             {
-                for (int j = i+1; j < array.Length; j++)
+                int min = array[i];
+                int minIndex = i;
+                for (int j = i + 1; j < array.Length; j++)
                 {
-                    if (array[i] < min) min = array[i];
+                    if (array[j] < min)
+                    {
+                        min = array[j]; 
+                        minIndex = j;   
+                    }
                 }
-                temp = array[min];
-                array[min] = array[i];
-                array[i] = temp;
-            }
-            for (int i = 0; i<array.Length; i++)
+
+                int temp = array[i];
+                array[i] = min;
+                array[minIndex] = temp;
+                for (int a = 0; a < array.Length; a++)
             {
-                Console.WriteLine(array[i]);
+                Console.Write(array[a] + " ");
+            }
+                Console.WriteLine();
             }
 
-
+            //Bubble sort
+            
         }
 
     }
