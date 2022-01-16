@@ -15,8 +15,7 @@ namespace App21
                 }
                 Console.WriteLine();
             }
-            
-            
+                      
         
         }
     }
