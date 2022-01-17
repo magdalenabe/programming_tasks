@@ -31,7 +31,7 @@ namespace App15
                 Console.WriteLine();
             }
 
-            //Bubble sort
+            
             
         }
 
