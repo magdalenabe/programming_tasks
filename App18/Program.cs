@@ -10,17 +10,9 @@ namespace ConsoleApp1
             Console.WriteLine("Specify the sort order (asc for ascending and desc for descending):");
             string order = Console.ReadLine();
             PrintArray(arr, order);
-            //if (order is "asc")
-            //{
-            //    PrintArrayAsc(arr);
-            //}
-            //else if (order is "desc")
-            //{
-            //    PrintArrayDesc(arr);
-            //}
         }
 
-        static void PrintArray(int[] array, string sortingMethod)
+        static int[] PrintArray(int[] array)
         {
             if (sortingMethod is "asc")
             {
@@ -35,6 +27,7 @@ namespace ConsoleApp1
                 Console.WriteLine("The sort order you specify does not exist");
             }
         }
+
         static void PrintArrayAsc(int[] array)
         {
             for (int i = 0; i < array.Length; i++)
@@ -47,6 +40,7 @@ namespace ConsoleApp1
                         bubble = array[j];
                         array[j] = array[i];
                         array[i] = bubble;
+                   
                     }
                 }
                 Console.Write(array[i] + " ");
