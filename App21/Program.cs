@@ -13,40 +13,11 @@ namespace App21
             int numberOfShips = 2;
             AddShipsToBoard(gameboard, numberOfShips);
             DisplayBoard(gameboard);
-
             int shot = 0;
             while (shot < numberOfShips)
             {
-                int x = 0;
-                while ( x <= 0  || x > 10)
-                {
-                    Console.WriteLine("Specify coordinate x:");
-                    var result = int.TryParse(Console.ReadLine(), out x);
-                    if ( result == false)
-                    {
-                        Console.WriteLine("Specify value is not a proper number");
-                    }
-                    else if (x <= 0  || x > 10)
-                    {
-                        Console.WriteLine("Specify the number between 1 and 10");
-                    }
-                }
-
-                int y = 0;
-                while ( y <= 0  || y > 10)
-                {
-                    Console.WriteLine("Specify coordinate y:");
-                    var result = int.TryParse(Console.ReadLine(), out y);
-                    if ( result == false)
-                    {
-                        Console.WriteLine("Specify value is not a proper number");
-                    }
-                    else if (y <= 0  || y > 10)
-                    {
-                        Console.WriteLine("Specify the number between 1 and 10");
-                    }
-                }
-
+                int x = GetCoordinate("x");
+                int y = GetCoordinate("y");
                 if (gameboard[x - 1, y - 1] == 1)
                 {
                     Console.WriteLine("You shot a ship, keep on");
@@ -60,9 +31,7 @@ namespace App21
                 {
                     Console.WriteLine("Sorry, you've missed");
                 }
-
             }
-
         }
 
         static void AddShipsToBoard(int[,] board, int numberOfShips)
@@ -80,9 +49,7 @@ namespace App21
 
             }
             while (add < numberOfShips);
-
         }
-
         static void DisplayBoard(int[,] board)
         {
             for (int x = 0; x < board.GetLength(0); x++)
@@ -96,14 +63,29 @@ namespace App21
                 Console.WriteLine();
             }
         }
-
         static int GetRandomNumber()
         {
             Random rand = new Random();
             int a = rand.Next(0, 10);
             return a;
         }
-
-
+        static int GetCoordinate(string coordinateName)
+        {
+            int coordinate = 0;
+            while (coordinate <= 0 || coordinate > 10)
+            {
+                Console.WriteLine($"Specify coordinate {coordinateName}:");
+                var result = int.TryParse(Console.ReadLine(), out coordinate);
+                if (result == false)
+                {
+                    Console.WriteLine("Specify value is not a proper number");
+                }
+                else if (coordinate <= 0 || coordinate > 10)
+                {
+                    Console.WriteLine("Specify the number between 1 and 10");
+                }
+            }
+            return coordinate;
+        }
     }
 }
