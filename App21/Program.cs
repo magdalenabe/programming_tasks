@@ -10,22 +10,63 @@ namespace App21
             DisplayBoard(emptyArray);
             Console.WriteLine();
             int[,] gameboard = new int[10, 10];
-            AddShipsToBoard(gameboard, 10);
+            int numberOfShips = 2;
+            AddShipsToBoard(gameboard, numberOfShips);
             DisplayBoard(gameboard);
 
+            int shot = 0;
+            while (shot < numberOfShips)
+            {
+                int x = 0;
+                while ( x <= 0  || x > 10)
+                {
+                    Console.WriteLine("Specify coordinate x:");
+                    var result = int.TryParse(Console.ReadLine(), out x);
+                    if ( result == false)
+                    {
+                        Console.WriteLine("Specify value is not a proper number");
+                    }
+                    else if (x <= 0  || x > 10)
+                    {
+                        Console.WriteLine("Specify the number between 1 and 10");
+                    }
+                }
 
+                int y = 0;
+                while ( y <= 0  || y > 10)
+                {
+                    Console.WriteLine("Specify coordinate y:");
+                    var result = int.TryParse(Console.ReadLine(), out y);
+                    if ( result == false)
+                    {
+                        Console.WriteLine("Specify value is not a proper number");
+                    }
+                    else if (y <= 0  || y > 10)
+                    {
+                        Console.WriteLine("Specify the number between 1 and 10");
+                    }
+                }
+
+                if (gameboard[x - 1, y - 1] == 1)
+                {
+                    Console.WriteLine("You shot a ship, keep on");
+                    shot++;
+                    if (shot == numberOfShips)
+                    {
+                        Console.WriteLine("Great, you shot all ships");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Sorry, you've missed");
+                }
+
+            }
 
         }
-   
+
         static void AddShipsToBoard(int[,] board, int numberOfShips)
         {
-            //for (int index = 0; index < numberOfShips; index++)
-            //{
-            //    var x = GetRandomNumber();
-            //    var y = GetRandomNumber();
-            //    board[x, y] = 1;
-
-            //} 
             var add = 0;
             do
             {
@@ -36,13 +77,13 @@ namespace App21
                     board[x, y] = 1;
                     add++;
                 }
-                
+
             }
             while (add < numberOfShips);
 
         }
 
-        static void DisplayBoard(int [,] board)
+        static void DisplayBoard(int[,] board)
         {
             for (int x = 0; x < board.GetLength(0); x++)
             {
@@ -62,5 +103,7 @@ namespace App21
             int a = rand.Next(0, 10);
             return a;
         }
+
+
     }
 }
