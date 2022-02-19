@@ -6,8 +6,8 @@ namespace App33
     {
         static void Main(string[] args)
         {
-            Logger.Log("Magic Ice", DateTime.Now, "Game started");
-            Logger.Log("Magic Ice", DateTime.Now, "Asking for number of players.");
+            Logger.Log(DateTime.Now, "Game started");
+            Logger.Log(DateTime.Now, "Asking for number of players.");
             var players = new Player[NumberOfPlayers()];
             
             var isFinished = false;
@@ -20,29 +20,29 @@ namespace App33
                 for (var playerIndex = 0; playerIndex < players.Length; playerIndex++)
                 {
                     int rollResult = players[playerIndex].RollTheDice();
-                    Logger.Log("Magic Ice", DateTime.Now, $"Player {playerIndex + 1} roll {rollResult}.");
+                    Logger.Log(DateTime.Now, $"Player {playerIndex + 1} roll {rollResult}.");
                     players[playerIndex].FieldNumber(rollResult);
                     
                     if (IsTheFieldEven(players[playerIndex].GetFieldNumber()))
                     {
                         int spinPoints = players[playerIndex].SpinTheWheel();
-                        Logger.Log("Magic Ice", DateTime.Now, $"Player {playerIndex + 1} is on the even field, so he spin the wheel.");
+                        Logger.Log(DateTime.Now, $"Player {playerIndex + 1} is on the even field, so he spin the wheel.");
                         players[playerIndex].AddPoints(spinPoints);
                     }
                     if (players[playerIndex].GetFieldNumber() >= 96)
                     {
-                        Logger.Log("Magic Ice", DateTime.Now, $"Player {players[playerIndex].GetName()} reached the last field.");
+                        Logger.Log(DateTime.Now, $"Player {players[playerIndex].GetName()} reached the last field.");
                         isFinished = true;
                         break;
                     }
                 }
             } while (!isFinished);
             Console.WriteLine("End of the game.");
-            Logger.Log("Magic Ice", DateTime.Now, "Game ended.");
+            Logger.Log(DateTime.Now, "Game ended.");
             Console.WriteLine();
             for (int i = 0; i < players.Length; i++)
             {
-                Logger.Log("Magic Ice", DateTime.Now, $"Scoring summary Player {players[i].GetName()}.");
+                Logger.Log(DateTime.Now, $"Scoring summary Player {players[i].GetName()}.");
                 Console.WriteLine($"Player {players[i].GetName()} has {players[i].GetPoints()} points.");
             }
         }
@@ -94,13 +94,13 @@ namespace App33
         {
             _points += points;
             Console.WriteLine($"Player {_name} got {_points} points.");
-            //Logger.Log("Magic Ice", DateTime.Now, $"Player {_name} got {_points} points.");
+            //Logger.Log(DateTime.Now, $"Player {_name} got {_points} points.");
         }
         public void FieldNumber(int field)
         {
             _field += field;
             Console.WriteLine($"Player {_name} moved to field number {_field}.");
-            //Logger.Log("Magic Ice", DateTime.Now, $"Player {_name} moved to field number {_field}.");
+            //Logger.Log(DateTime.Now, $"Player {_name} moved to field number {_field}.");
         }
         public string GetName()
         {

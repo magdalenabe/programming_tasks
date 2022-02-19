@@ -8,9 +8,10 @@ namespace App33
 {
     internal class Logger
     {
-        public static void Log (string program, DateTime dateTime, string msg)
+        const string programName = "Magic Ice";
+        public static void Log (DateTime dateTime, string msg,  string program = programName)
         {
-            Console.WriteLine("Game play: {0}, DateTime: {1}, Message: {2}", program, dateTime, msg);
+            Console.WriteLine($"Game play: {program}, DateTime: {dateTime}, Message: {msg}");
         }
     }
 }
