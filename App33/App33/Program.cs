@@ -19,18 +19,19 @@ namespace App33
             {
                 for (var playerIndex = 0; playerIndex < players.Length; playerIndex++)
                 {
-                    int rollResult = RollTheDice();
+                    int rollResult = players[playerIndex].RollTheDice();
                     Logger.Log("Magic Ice", DateTime.Now, $"Player {playerIndex + 1} roll {rollResult}.");
                     players[playerIndex].FieldNumber(rollResult);
                     
                     if (IsTheFieldEven(players[playerIndex].GetFieldNumber()))
                     {
-                        int spinPoints = SpinTheWheel();
+                        int spinPoints = players[playerIndex].SpinTheWheel();
                         Logger.Log("Magic Ice", DateTime.Now, $"Player {playerIndex + 1} is on the even field, so he spin the wheel.");
                         players[playerIndex].AddPoints(spinPoints);
                     }
                     if (players[playerIndex].GetFieldNumber() >= 96)
                     {
+                        Logger.Log("Magic Ice", DateTime.Now, $"Player {players[playerIndex].GetName()} reached the last field.");
                         isFinished = true;
                         break;
                     }
@@ -50,12 +51,6 @@ namespace App33
             Console.WriteLine("This is a 2-4 players game. How many players will play?");
             return int.Parse(Console.ReadLine());
         }
-        static int RollTheDice()
-        {
-            Random rand = new Random();
-            int roll = rand.Next(1, 7);
-            return roll;
-        }
         static bool IsTheFieldEven(int value)
         {
             if (value % 2 == 0)
@@ -63,9 +58,25 @@ namespace App33
                 return true;
             }
             return false;
-
         }
-        static int SpinTheWheel()
+    }
+    class Player
+    {
+        private string _name;
+        private int _points;
+        private int _field;
+        public Player(string name)
+        {
+            _name = name;
+            
+        }
+        public int RollTheDice()
+        {
+            Random rand = new Random();
+            int roll = rand.Next(1, 7);
+            return roll;
+        }
+        public int SpinTheWheel()
         {
             Random spin = new Random();
             int probability = spin.Next(0, 100);
@@ -78,19 +89,6 @@ namespace App33
                 return 3;
             }
             return 1;
-        }
-    }
-
-    class Player
-    {
-        private string _name;
-        private int _points;
-        private int _field;
-
-        public Player(string name)
-        {
-            _name = name;
-            
         }
         public void AddPoints(int points)
         {
